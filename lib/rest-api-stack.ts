@@ -71,6 +71,7 @@ export class RestAPIStack extends cdk.Stack {
         memorySize: 128,
         environment: {
           TABLE_NAME: moviesTable.tableName,
+          CAST_TABLE: movieCastsTable.tableName,
           REGION: 'eu-west-1',
         },
       }
@@ -131,6 +132,7 @@ export class RestAPIStack extends cdk.Stack {
     moviesTable.grantReadData(getMovieByIdFn);
     moviesTable.grantReadData(getAllMoviesFn);
     movieCastsTable.grantReadData(getMovieCastMembersFn);
+    movieCastsTable.grantReadData(getMovieByIdFn);
 
     // REST API 
     const api = new apig.RestApi(this, "RestAPI", {
